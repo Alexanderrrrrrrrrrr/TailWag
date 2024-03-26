@@ -1,0 +1,128 @@
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.drawer {
+    position: absolute;
+    width: 385px;
+    height: 100%;
+    right: 0;
+    background: #ffffff;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    height: 100vh;
+
+    .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    p {
+        font-size: 21px;
+    }
+
+    b {
+        font-size: 20px;
+    }
+}
+
+.cartItem {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    border: 1px solid #f3f3f3;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.btnRemuve {
+    opacity: 0.4;
+    cursor: pointer;
+    transition: opasity 0.15s ease-in-out;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.cardTotalBlok {
+    div {
+        flex: 1;
+        height: 1px;
+        border: 1px dashed #dfdfdf;
+        position: relative;
+        top: -4px;
+    }
+
+    li {
+        display: flex;
+        align-items: flex-end;
+        gap: 7px;
+    }
+}
+
+.items {
+    margin-bottom: auto;
+    overflow: auto;
+}
+
+.itemsButton {
+    margin-bottom: 50px;
+    cursor: pointer;
+
+    button {
+        margin-top: 20px;
+        width: 100%;
+        height: 55px;
+        background-color: #9dd558;
+        border-radius: 18px;
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+
+        &:hover {
+            background: rebeccapurple;
+        }
+    }
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    margin-top: 150px;
+}
+.greenButton {
+    padding: 15px 65px;
+    border-radius: 18px;
+    background-color: #9dd558;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    transition: transform 0.3s; 
+    transform: translateX(0);
+    position: relative; 
+}
+
+.greenButton:hover img {
+    transform: rotate(180deg) translateX(-5px); 
+}
+
+.greenButton img {
+    margin-right: 20px;
+    transition: transform 0.3s; 
+}

@@ -21,49 +21,6 @@ body {
   margin: 50px auto;
 }
 
-header {
-  border-bottom: 1px solid #f4f4f4;
-  display: flex;
-  justify-content: space-between;
-  padding: 40px;
-  align-items: centers;
-
-  .headerLeft {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-
-    .headerInfo_title {
-      margin: 0;
-      text-transform: uppercase;
-      font-family: Lobster;
-    }
-
-    .headerInfo_text {
-      margin: 0;
-      font-family: Lobster;
-      opacity: 0.7;
-    }
-  }
-
-  .headerRight {
-    list-style-type: none;
-    display: flex;
-
-
-    .headerRightItem {
-      display: flex;
-    }
-
-    .prise {
-      margin-right: 20px;
-    }
-
-    .headerRightImg {
-      margin-right: 10px;
-    }
-  }
-}
 
 .content {
   padding: 40px;
@@ -72,65 +29,30 @@ header {
 }
 
 
-.card {
-  border: 1px solid #f3f3f3;
-  padding: 20px;
-  border-radius: 40px;
-  width: 220px;
-  transition: box-shadow 0.2s ease-in-out transform 0.2s ease-in-out;
-
-  &:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transform: translateY(-5px);
-  }
-
-  .cardButton {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .favarit {
-    position: absolute;
-    cursor: pointer;
-  }
-
-  .cardButtonPrice {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .button {
-    background: #ffffff;
-    border: 1px solid #f2f2f2;
-    box-sizing: border-box;
-    border-radius: 8px;
-    height: 32px;
-    width: 32px;
-    cursor: pointer;
-    align-items: center;
-  }
-
-  h5 {
-    margin: 0;
-  }
-
-  span {
-    text-transform: uppercase;
-    font-size: 14px;
-    opacity: 0.5;
-  }
-}
-
 .titleSearch {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
-  
+
 
   .search {
     border: 1px solid #f3f3f3;
+    align-items: center;
+    display: flex;
+    position: relative;
+
+    .remove {
+      position: absolute;
+      right: 0;
+      width: 18px;
+      height: 18px;
+      padding-right: 10px;
+    }
+  }
+
+  img {
+    margin-left: 10px;
   }
 
   input {
@@ -140,102 +62,6 @@ header {
   }
 }
 
-.overlay {
-  position: absolute;
-  left: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-}
-
-.drawer {
-  position: absolute;
-  width: 385px;
-  height: 100%;
-  right: 0;
-  background: #ffffff;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
-
-  h2 {
-    margin-bottom: 30px;
-  }
-
-  p {
-    font-size: 21px;
-  }
-
-  b {
-    font-size: 20px;
-  }
-}
-
-.cartItem {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  border: 1px solid #f3f3f3;
-  border-radius: 20px;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-
-.btnRemuve {
-  opacity: 0.4;
-  cursor: pointer;
-  transition: opasity 0.15s ease-in-out;
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.cardTotalBlok {
-  div {
-    flex: 1;
-    height: 1px;
-    border: 1px dashed #dfdfdf;
-    position: relative;
-    top: -4px;
-  }
-
-  li {
-    display: flex;
-    align-items: flex-end;
-    gap: 7px;
-  }
-}
-
-.items {
-  margin-bottom: auto;
-  overflow: auto;
-}
-
-.itemsButton {
-  margin-bottom: 50px;
-  cursor: pointer;
-
-  button {
-    margin-top: 20px;
-    width: 100%;
-    height: 55px;
-    background-color: #9dd558;
-    border-radius: 18px;
-    border: none;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-
-    &:hover {
-      background: rebeccapurple;
-    }
-  }
-}
 .cardList {
   display: flex;
   flex-wrap: wrap;
