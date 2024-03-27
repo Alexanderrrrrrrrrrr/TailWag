@@ -1,21 +1,17 @@
+import React from 'react';
 import Card from "../../components/card";
 import styles from "./styles.module.scss";
 
-function Favorits({ items, onFavorite }) {
+function Favorites({ items, onFavorite }) {
     const handleFavorite = (id) => {
-        const existingIndex = items.findIndex(item => item.id === id);
-        if (existingIndex !== -1) {
-            const updatedItems = [...items];
-            updatedItems.splice(existingIndex, 1);
-            onFavorite(updatedItems);
-        }
+        onFavorite(id);
     };
-
+    console.log(items)
     return (
         <div>
             <h1 className={styles.title}>Мои закладки</h1>
             <div className={styles.list}>
-                {items.map((item, index) => {
+                {items && items.map((item, index) => {
                     return (
                         <Card
                             key={index}
@@ -25,6 +21,7 @@ function Favorits({ items, onFavorite }) {
                             price={item.price}
                             img={item.img}
                             onFavorite={() => handleFavorite(item.id)}
+                            favorited={true}
                         />
                     );
                 })}
@@ -32,4 +29,5 @@ function Favorits({ items, onFavorite }) {
         </div>
     );
 }
-export default Favorits;
+
+export default Favorites;

@@ -5,25 +5,16 @@ import { Route, Routes } from "react-router-dom";
 import Header from './components/header';
 import Drawer from './components/drawer';
 import Home from './pages/Home';
-import Favorits from './pages/favorites/favorites';
-
-// const arr = [
-//   {name: 'Тор',character: "Ласковый любит есть ",priсe: 500, img: "https://as2.ftcdn.net/v2/jpg/01/02/40/87/1000_F_102408723_7QwK6aPAuPpEOB0a5kx2BeiUj5Apipqf.jpg"},
-//   {name: 'Гора', character: "Тактильный, грызет пятки", priсe: 1000, img: "https://as2.ftcdn.net/v2/jpg/01/03/38/97/1000_F_103389700_dwCubYO5C6xgq7QYHAkZHSDKtW0rU2vx.jpg"},
-//   {name: 'Бэти', character: "Много играет", priсe: 1500, img: "https://as2.ftcdn.net/v2/jpg/01/05/69/65/1000_F_105696528_mcfLRp3M8TeeCsKkAwGsBv0SXCTRVj27.jpg"},
-//   {name: 'Квентин', character: "Ленивый ,много спит", priсe: 300, img: "https://as1.ftcdn.net/v2/jpg/01/05/82/90/1000_F_105829061_eb6IoMdotejIKwPNg7lSSGVDK058rjRL.jpg"},
-//   {name: 'Юра', character: "Много говорит,и материться", priсe: 2000, img: "https://as2.ftcdn.net/v2/jpg/01/01/92/99/1000_F_101929915_3Gu9yguO4bF3lEDpvRdQKSjaPp0EBi25.jpg"},
-//   {name: 'Минерва', character: "Смотрит в окно по вечерам", priсe: 200, img: "https://as2.ftcdn.net/v2/jpg/01/05/52/81/1000_F_105528134_FQLRdIRrZHoINZcTllWCXTKmwJYMm7Jr.jpg"},
-//   {name: 'Луна', character: "Ласковый любит есть ", priсe: 700, img: "https://as2.ftcdn.net/v2/jpg/01/19/97/91/1000_F_119979108_gxVQMgdFVhOqenTX270asJCHQuNyqR8M.jpg"},
-// ]
+import Favorites from './pages/favorites/favorites';
 
 function App() {
   const [cartOpened, setCardOpened] = useState(false)
-  const [itens, setItems] = useState([])
+  const [items, setItems] = useState([])
   const [cartItems, setCartItems] = useState([])
   const [searchValue, setSearchValue] = useState('')
   const [favorite, setFavorite] = useState([])
 
+  console.log(favorite)
   useEffect(() => {
     axios.get('https://65fa97dd3909a9a65b1ad3ad.mockapi.io/items').then((res) => {
       setItems(res.data)
@@ -44,14 +35,16 @@ function App() {
     }
   }
 
-  const onFavorite = (obj) => {
-    const { id } = obj;
-    if (favorite.find((favObj) => Number(favObj.id) === Number(obj.id))) {
-      setFavorite((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)))
+  const onFavorite = (id) => {
+    if (favorite.find((favObj) => Number(favObj.id) === Number(id))) {
+        setFavorite((prev) => prev.filter((item) => Number(item.id) !== Number(id)));
     } else {
-      setFavorite(prev => [...prev, obj]);
+        const item = items.find((item) => Number(item.id) === Number(id));
+        if (item) {
+            setFavorite(prev => [...prev, item]);
+        }
     }
-  }
+};
 
   const onRemoveItem = (id) => {
     axios.delete(`https://65fa97dd3909a9a65b1ad3ad.mockapi.io/card/${id}`);
@@ -72,7 +65,7 @@ function App() {
           path="/"
           element={
             <Home
-              items={itens}
+              items={items}
               searchValue={searchValue}
               setSearchValue={setSearchValue}
               onChangeSearchInput={onChangeSearchInput}
@@ -85,7 +78,7 @@ function App() {
         <Route
           path="/favorites"
           element={
-            <Favorits
+            <Favorites
               items={favorite}
               onFavorite={onFavorite}
             />

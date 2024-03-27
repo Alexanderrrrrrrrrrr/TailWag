@@ -1,6 +1,6 @@
 import Card from "../components/card";
 
-function Home({ items, searchValue, setSearchValue, onChangeSearchInput, onFavorite, onAddToCart }) {
+function Home({ items, searchValue, setSearchValue, onChangeSearchInput, onFavorite, onAddToCart }) { 
     return (
         <div className="content">
             <div className="titleSearch">
