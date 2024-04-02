@@ -1,6 +1,35 @@
+import React from "react";
 import Card from "../components/card";
+import { AppContext } from '../App';
 
-function Home({ items, searchValue, setSearchValue, onChangeSearchInput, onFavorite, onAddToCart }) { 
+function Home({ items, searchValue, setSearchValue, onChangeSearchInput, onFavorite, onAddToCart, favorite, isLoading}) {
+
+    const {isItemAdded}= React.useContext(AppContext)
+
+    const renderItems = () => {
+        const  filterItems = items.filter((item) => item.name?.toLowerCase().includes(searchValue.toLowerCase()))
+        return (isLoading ? [...Array(7)]: filterItems) .map((item, index) => {
+            if (!item) return null;
+            const test = favorite.find((favoriteItem) => favoriteItem.id === item.id)
+            const isFavorite = test?.id ? true : false
+            return (
+                <Card
+                    id={item.id}
+                    key={index}
+                    name={item.name}
+                    character={item.character}
+                    price={item.price}
+                    img={item.img}
+                    onFavorite={(obj) => onFavorite(obj)}
+                    onPlus={(obj) => onAddToCart(obj)}
+                    favorite={isFavorite}
+                    loading={isLoading}
+                    added={isItemAdded(item.id)}
+                />
+            );
+        })
+    }
+
     return (
         <div className="content">
             <div className="titleSearch">
@@ -12,20 +41,7 @@ function Home({ items, searchValue, setSearchValue, onChangeSearchInput, onFavor
                 </div>
             </div>
             <div className="cardList">
-                {items && items.filter((item) => item.name?.toLowerCase().includes(searchValue.toLowerCase())).map((item, index) => {
-                    return (
-                        <Card
-                            key={index}
-                            name={item.name}
-                            character={item.character}
-                            price={item.price}
-                            img={item.img}
-                            onFavorite={(obj) => onFavorite(obj)}
-                            onPlus={(obj) => onAddToCart(obj)}
-                        
-                        />
-                    );
-                })}
+                {renderItems()}
             </div>
         </div>
     )

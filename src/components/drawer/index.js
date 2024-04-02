@@ -1,7 +1,16 @@
+import React from 'react';
 import styles from './styles.module.scss';
 import remove from '../../img/btn-remove.svg';
+import Info from '../info/info';
+import { useState } from 'react';
+
 
 function Drawer({ onClose, items = [], onRemove }) {
+    const[isOrderComplite, setIsOrderComplite] = useState(false);
+
+    const onClickOrder = ()=> {
+        setIsOrderComplite(true) 
+    }
     return (
         <div className={styles.overlay}>
             <div className={styles.drawer}>
@@ -37,19 +46,12 @@ function Drawer({ onClose, items = [], onRemove }) {
                                 <b>1000р</b>
                             </li>
                         </ul>
-                        <button>Оформить заказ</button>
+                        <button onClick={onClickOrder}>Оформить заказ</button>
                     </div>
                         </div>
                     )
                 : (
-                    <div className={styles.empty}>
-                    <img src='https://github.com/Archakov06/react-sneakers/blob/master/public/img/empty-cart.jpg?raw=true' alt='img'></img>
-                    <h2>Корзина пустая</h2>
-                    <p>Добавьте хотябы одну позицию для оформления заказа</p>
-                    <button className={styles.greenButton} onClick={onClose}>
-                        <img src='https://raw.githubusercontent.com/Archakov06/react-sneakers/019a5194ed0e93295298a624ba3aa222ee617533/public/img/arrow.svg' alt='img'></img>
-                        Вернуться назад</button>
-                </div>
+                    <Info title="Корзина пустая" description="Добавьте хотябы одну позицию для оформления заказа" img="https://github.com/Archakov06/react-sneakers/blob/master/public/img/empty-cart.jpg?raw=true" />
                 )
                 
             }

@@ -1,17 +1,23 @@
 import React from 'react';
 import Card from "../../components/card";
 import styles from "./styles.module.scss";
+import { AppContext } from '../../App';
 
-function Favorites({ items, onFavorite }) {
-    const handleFavorite = (id) => {
-        onFavorite(id);
+
+
+function Favorites({ onFavorite }) {
+
+    const {favorite}= React.useContext(AppContext)
+    
+    const handleFavorite = (item) => {
+        onFavorite(item);
     };
-    console.log(items)
+    
     return (
         <div>
             <h1 className={styles.title}>Мои закладки</h1>
             <div className={styles.list}>
-                {items && items.map((item, index) => {
+                {favorite && favorite.map((item, index) => {
                     return (
                         <Card
                             key={index}
@@ -20,7 +26,7 @@ function Favorites({ items, onFavorite }) {
                             character={item.character}
                             price={item.price}
                             img={item.img}
-                            onFavorite={() => handleFavorite(item.id)}
+                            onFavorite={() => handleFavorite(item)}
                             favorited={true}
                         />
                     );

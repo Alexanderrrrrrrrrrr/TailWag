@@ -1,0 +1,28 @@
+.empty {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    margin-top: 150px;
+}
+.greenButton {
+    padding: 15px 65px;
+    border-radius: 18px;
+    background-color: #9dd558;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    transition: transform 0.3s; 
+    transform: translateX(0);
+    position: relative; 
+}
+
+.greenButton:hover img {
+    transform: rotate(180deg) translateX(-5px); 
+}
+
+.greenButton img {
+    margin-right: 20px;
+    transition: transform 0.3s; 
+}
