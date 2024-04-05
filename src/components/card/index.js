@@ -6,7 +6,7 @@ import ContentLoader from "react-content-loader"
 function Card({ id, name, img, character, price, onFavorite, onPlus, favorited, loading }) {
     const [isAdd, setIsAdd] = useState(false)
     const [isfavorite, setfavorite] = useState(favorited)
-
+    
     const onClickPlus = () => {
         onPlus({ id, name, img, character, price })
         setIsAdd(!isAdd)
@@ -17,7 +17,7 @@ function Card({ id, name, img, character, price, onFavorite, onPlus, favorited, 
         onFavorite({ id, name, img, character, price })
 
     }
-
+    
     return (
         <div className={styles.card}>
             {

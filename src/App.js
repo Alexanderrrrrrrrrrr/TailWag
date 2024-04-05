@@ -6,6 +6,7 @@ import Header from './components/header';
 import Drawer from './components/drawer';
 import Home from './pages/Home';
 import Favorites from './pages/favorites/favorites';
+import Order from './pages/odrer/order';
 
 export const AppContext = React.createContext({})
 
@@ -17,6 +18,7 @@ function App() {
   const [favorite, setFavorite] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
+    
   useEffect(() => {
     axios.get('https://65fa97dd3909a9a65b1ad3ad.mockapi.io/items').then((res) => {
       setItems(res.data)
@@ -56,9 +58,9 @@ function App() {
 
 
   const onRemoveItem = (id) => {
-    axios.delete(`https://65fa97dd3909a9a65b1ad3ad.mockapi.io/card/${id}`);
+    // axios.delete(`https://65fa97dd3909a9a65b1ad3ad.mockapi.io/card/${id}`);
     setCartItems((prev) => prev.filter(item => item.id !== id));
-
+    
   }
 
   const onChangeSearchInput = (event) => {
@@ -66,11 +68,13 @@ function App() {
   }
 
   const isItemAdded = (id) => {
-    cartItems.some((obj) => Number(obj.id) === Number(id))
+    console.log('отработало',cartItems.some((obj) => Number(obj.id) === Number(id)))
+    return cartItems.some((obj) => Number(obj.id) === Number(id))
+    
   }
 
   return (
-    <AppContext.Provider value={{cartItems, favorite, items, setCardOpened,isItemAdded}}>
+    <AppContext.Provider value={{ cartItems, favorite, items, setCardOpened, isItemAdded, setCartItems, onRemoveItem }}>
       <div className="wrapper">
         {cartOpened ? <Drawer items={cartItems} onClose={() => setCardOpened(false)} onRemove={onRemoveItem} /> : null}
         <Header onClickCard={() => setCardOpened(true)} />
@@ -101,7 +105,18 @@ function App() {
             }
             exact
           />
+          <Route
+            path="/order"
+            element={
+              <Order
+                items={favorite}
+                onFavorite={onFavorite}
+              />
+            }
+            exact
+          />
         </Routes>
+
       </div >
     </AppContext.Provider>
 

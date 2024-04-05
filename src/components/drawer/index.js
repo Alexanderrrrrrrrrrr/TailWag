@@ -3,13 +3,20 @@ import styles from './styles.module.scss';
 import remove from '../../img/btn-remove.svg';
 import Info from '../info/info';
 import { useState } from 'react';
+import { AppContext } from '../../App';
 
 
 function Drawer({ onClose, items = [], onRemove }) {
+    const { setCartItems, cartItems } = React.useContext(AppContext)
+    const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0)
+
     const[isOrderComplite, setIsOrderComplite] = useState(false);
+
+    const {onRemoveItem}= React.useContext(AppContext)
 
     const onClickOrder = ()=> {
         setIsOrderComplite(true) 
+        setCartItems([])
     }
     return (
         <div className={styles.overlay}>
@@ -38,7 +45,7 @@ function Drawer({ onClose, items = [], onRemove }) {
                             <li>
                                 <span>Итого:</span>
                                 <div></div>
-                                <b>500р</b>
+                                <b>{totalPrice}р</b>
                             </li>
                             <li>
                                 <span>Доставка:</span>
@@ -51,7 +58,9 @@ function Drawer({ onClose, items = [], onRemove }) {
                         </div>
                     )
                 : (
-                    <Info title="Корзина пустая" description="Добавьте хотябы одну позицию для оформления заказа" img="https://github.com/Archakov06/react-sneakers/blob/master/public/img/empty-cart.jpg?raw=true" />
+                    <Info title={isOrderComplite ? "Заказ оформлен" : "Корзина пустая"} 
+                    description={isOrderComplite ? "Ваш заказ №18 уже собираеться к вам " : "Добавьте хотябы одну позицию для оформления заказа"} 
+                    img={isOrderComplite ? "https://github.com/Archakov06/react-sneakers/blob/master/public/img/complete-order.jpg?raw=true" : "https://github.com/Archakov06/react-sneakers/blob/master/public/img/empty-cart.jpg?raw=true"} />
                 )
                 
             }
