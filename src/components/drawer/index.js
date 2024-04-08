@@ -7,7 +7,7 @@ import { AppContext } from '../../App';
 
 
 function Drawer({ onClose, items = [], onRemove }) {
-    const { setCartItems, cartItems } = React.useContext(AppContext)
+    const { setCartItems, cartItems, setOrder } = React.useContext(AppContext)
     const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0)
 
     const[isOrderComplite, setIsOrderComplite] = useState(false);
@@ -16,6 +16,7 @@ function Drawer({ onClose, items = [], onRemove }) {
 
     const onClickOrder = ()=> {
         setIsOrderComplite(true) 
+        setOrder(cartItems)
         setCartItems([])
     }
     return (

@@ -28,7 +28,7 @@ function Home({ items, searchValue, setSearchValue, onChangeSearchInput, onFavor
                     onPlus={(obj) => onAddToCart(obj)}
                     favorite={isFavorite}
                     loading={isLoading}
-                    added={isItemAdded(item?.id)}
+                    isAddedInCart={isItemAdded(item?.id)}
                 />
             );
         })

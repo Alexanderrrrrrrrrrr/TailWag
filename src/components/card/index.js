@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import ContentLoader from "react-content-loader"
 
 
-function Card({ id, name, img, character, price, onFavorite, onPlus, favorited, loading }) {
-    const [isAdd, setIsAdd] = useState(false)
+function Card({ id, name, img, character, price, onFavorite, onPlus, favorited, loading, isAddedInCart, isOrderCart }) {
+    const [isAdd, setIsAdd] = useState(isAddedInCart)
     const [isfavorite, setfavorite] = useState(favorited)
-    
+
     const onClickPlus = () => {
         onPlus({ id, name, img, character, price })
         setIsAdd(!isAdd)
+
     }
 
     const onClickFavorite = () => {
@@ -17,7 +18,12 @@ function Card({ id, name, img, character, price, onFavorite, onPlus, favorited, 
         onFavorite({ id, name, img, character, price })
 
     }
-    
+
+    useEffect(() => {
+        setIsAdd(isAddedInCart)
+    }, [isAddedInCart])
+
+
     return (
         <div className={styles.card}>
             {
@@ -38,7 +44,9 @@ function Card({ id, name, img, character, price, onFavorite, onPlus, favorited, 
                     <rect x="34" y="96" rx="20" ry="20" width="200" height="198" />
                 </ContentLoader>) : (<>
                     <div className={styles.favarit} onClick={onFavorite}>
-                        <img onClick={onClickFavorite} src={isfavorite ? "https://raw.githubusercontent.com/Archakov06/react-sneakers/019a5194ed0e93295298a624ba3aa222ee617533/public/img/liked.svg" : "https://raw.githubusercontent.com/Archakov06/react-sneakers/019a5194ed0e93295298a624ba3aa222ee617533/public/img/unliked.svg"} alt="unliked"></img>
+                        {
+                            isOrderCart ? '' : (<img onClick={onClickFavorite} src={isfavorite ? "https://raw.githubusercontent.com/Archakov06/react-sneakers/019a5194ed0e93295298a624ba3aa222ee617533/public/img/liked.svg" : "https://raw.githubusercontent.com/Archakov06/react-sneakers/019a5194ed0e93295298a624ba3aa222ee617533/public/img/unliked.svg"} alt="unliked"></img>)
+                        }
                     </div>
                     <img src={img} alt="foto" style={{ width: '200px', height: '200px', borderRadius: '20px' }}></img>
                     <h5>{name}</h5>
@@ -48,7 +56,9 @@ function Card({ id, name, img, character, price, onFavorite, onPlus, favorited, 
                             <span>Цена:</span>
                             <b>{price}р/день</b>
                         </div>
-                        <img className={styles.button} onClick={onClickPlus} src={isAdd ? 'https://raw.githubusercontent.com/Archakov06/react-sneakers/019a5194ed0e93295298a624ba3aa222ee617533/public/img/btn-checked.svg' : 'https://raw.githubusercontent.com/Archakov06/react-sneakers/019a5194ed0e93295298a624ba3aa222ee617533/public/img/btn-remove.svg'} alt="plusButton" ></img>
+                        {
+                            isOrderCart ? '' : (<img className={styles.button} onClick={onClickPlus} src={isAdd ? 'https://raw.githubusercontent.com/Archakov06/react-sneakers/019a5194ed0e93295298a624ba3aa222ee617533/public/img/btn-checked.svg' : 'https://raw.githubusercontent.com/Archakov06/react-sneakers/019a5194ed0e93295298a624ba3aa222ee617533/public/img/btn-remove.svg'} alt="plusButton" ></img>)
+                        }
                     </div>
                 </>)
             }

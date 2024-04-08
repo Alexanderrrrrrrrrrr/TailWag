@@ -17,8 +17,9 @@ function App() {
   const [searchValue, setSearchValue] = useState('')
   const [favorite, setFavorite] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const [order, setOrder] = useState([])
 
-    
+    console.log('order', order)
   useEffect(() => {
     axios.get('https://65fa97dd3909a9a65b1ad3ad.mockapi.io/items').then((res) => {
       setItems(res.data)
@@ -58,7 +59,7 @@ function App() {
 
 
   const onRemoveItem = (id) => {
-    // axios.delete(`https://65fa97dd3909a9a65b1ad3ad.mockapi.io/card/${id}`);
+    axios.delete(`https://65fa97dd3909a9a65b1ad3ad.mockapi.io/card/${id}`);
     setCartItems((prev) => prev.filter(item => item.id !== id));
     
   }
@@ -68,13 +69,12 @@ function App() {
   }
 
   const isItemAdded = (id) => {
-    console.log('отработало',cartItems.some((obj) => Number(obj.id) === Number(id)))
     return cartItems.some((obj) => Number(obj.id) === Number(id))
     
   }
 
   return (
-    <AppContext.Provider value={{ cartItems, favorite, items, setCardOpened, isItemAdded, setCartItems, onRemoveItem }}>
+    <AppContext.Provider value={{ cartItems, favorite, items, setCardOpened, isItemAdded, setCartItems, onRemoveItem, setOrder, order }}>
       <div className="wrapper">
         {cartOpened ? <Drawer items={cartItems} onClose={() => setCardOpened(false)} onRemove={onRemoveItem} /> : null}
         <Header onClickCard={() => setCardOpened(true)} />
